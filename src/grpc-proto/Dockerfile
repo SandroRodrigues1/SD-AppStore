@@ -11,4 +11,3 @@ RUN python /app/proto-compiler.py
 
 CMD ["python", "main.py"]
 
-#
