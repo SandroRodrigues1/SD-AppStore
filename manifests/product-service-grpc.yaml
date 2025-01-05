@@ -33,12 +33,10 @@ kind: Service
 metadata:
   name: product-service-grpc
 spec:
-  type: NodePort
+  type: ClusterIP  
   ports:
-    - name: grpc
-      port: 8080
+    - port: 8080
       targetPort: 8080
-      nodePort: 30080  
   selector:
     app: product-service-grpc
 
