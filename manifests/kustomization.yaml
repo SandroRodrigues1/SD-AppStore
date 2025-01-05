@@ -8,5 +8,6 @@ resources:
 - rabbitmq.yaml
 - store-admin.yaml
 - store-front.yaml
+- product-service-grpc.yaml
 - virtual-customer.yaml
 - virtual-worker.yaml

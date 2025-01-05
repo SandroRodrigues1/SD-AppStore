@@ -5,7 +5,7 @@ WORKDIR /app
 COPY main.py ./ 
 COPY product-service.proto ./ 
 COPY proto-compiler.py ./ 
-COPY database ./database 
+COPY database ./database
 
 RUN pip install grpcio grpcio-tools prometheus_client psutil mysql-connector
 
