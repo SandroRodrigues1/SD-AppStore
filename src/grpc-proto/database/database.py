@@ -25,10 +25,9 @@ def create_connection():
 
 
 def insert_product(cursor, product):
-    query = """INSERT INTO products (id, name, price, description, image)
-               VALUES (%s, %s, %s, %s, %s)"""
+    query = """INSERT INTO products (name, price, description, image)
+               VALUES (%s, %s, %s, %s)"""
     cursor.execute(query, product)
-
 
 products = [
     (1, "Contoso Catnip's Friend", 9.99, "Watch your feline friend embark on a fishing adventure with Contoso Catnip's Friend toy. Packed with irresistible catnip and dangling fish lure.", "/catnip.jpg"),
