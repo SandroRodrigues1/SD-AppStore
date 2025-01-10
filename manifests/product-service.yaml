@@ -16,7 +16,7 @@ spec:
         "kubernetes.io/os": linux
       containers:
       - name: product-service
-        image: docker.io/sandro21/product-service
+        image: docker.io/sandro21/product-service:latest
         ports:
         - containerPort: 3002
         resources:
