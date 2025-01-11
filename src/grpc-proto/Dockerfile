@@ -7,6 +7,7 @@ COPY main.py ./
 COPY product-service.proto ./ 
 COPY proto-compiler.py ./ 
 COPY database ./database
+COPY prometheus/metrics.py ./prometheus/metrics.py
 
 RUN pip install grpcio grpcio-tools prometheus_client psutil mysql-connector
 
