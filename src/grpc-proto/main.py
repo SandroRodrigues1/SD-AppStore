@@ -5,7 +5,8 @@ import product_service_pb2
 import product_service_pb2_grpc
 from database.database import create_connection  
 from prometheus_client import start_http_server
-from prometheus.metrics import ProductServiceMetrics  # Importando as métricas
+from prometheus.metrics import ProductServiceMetrics
+
 
 class ProductService(product_service_pb2_grpc.ProductServiceServicer):
 
