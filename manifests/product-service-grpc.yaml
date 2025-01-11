@@ -14,7 +14,7 @@ spec:
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/path: "/metrics" 
-        prometheus.io/port: "9100" 
+        prometheus.io/port: "9090" 
     spec:
       nodeSelector:
         "kubernetes.io/os": linux
