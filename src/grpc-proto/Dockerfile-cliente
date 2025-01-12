@@ -1,0 +1,12 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY cliente.py ./cliente.py
+COPY product-service.proto ./ 
+COPY proto-compiler.py ./ 
+
+RUN pip install grpcio grpcio-tools prometheus_client
+RUN python /app/proto-compiler.py
+
+CMD ["python", "cliente.py"]
