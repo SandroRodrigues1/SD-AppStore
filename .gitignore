@@ -147,5 +147,5 @@ playwright/.cache/
 # custom helm values
 custom-values.yaml
 
-# Ignorar arquivos de variáveis de ambiente
+# Ignorar ficheiros de variáveis de ambiente
 .env
