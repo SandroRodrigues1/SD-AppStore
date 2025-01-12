@@ -78,7 +78,7 @@ def delete_product(stub):
         print("Erro ao deletar produto:", e)
 
 def menu():
-    with grpc.insecure_channel('localhost:9090') as channel:
+    with grpc.insecure_channel('localhost:8080') as channel:
         stub = product_service_pb2_grpc.ProductServiceStub(channel)
 
         while True:

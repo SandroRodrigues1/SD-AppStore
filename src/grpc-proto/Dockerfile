@@ -2,7 +2,6 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-COPY cliente.py ./
 COPY main.py ./ 
 COPY product-service.proto ./ 
 COPY proto-compiler.py ./ 
