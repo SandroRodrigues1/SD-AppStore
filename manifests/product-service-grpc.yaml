@@ -20,7 +20,7 @@ spec:
         "kubernetes.io/os": linux
       containers:
       - name: product-service-grpc
-        image: sandro21/product-service-grpc-proto:latest
+        image: docker.io/sandro21/product-service-grpc-proto:latest
         ports:
         - containerPort: 8080
         resources:
