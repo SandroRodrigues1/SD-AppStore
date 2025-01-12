@@ -7,7 +7,7 @@ DB_HOST = os.getenv("DB_HOST")
 DB_PORT = int(os.getenv("DB_PORT", 16308))  
 DB_NAME = os.getenv("DB_NAME", "defaultdb")
 DB_USER = os.getenv("DB_USER", "avnadmin")
-DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_PASS = os.getenv("DB_PASSWORD")
 
 load_dotenv()
 
@@ -17,7 +17,7 @@ def create_connection():
             host=DB_HOST,
             port=DB_PORT,
             user=DB_USER,
-            password=DB_PASSWORD,
+            password=DB_PASS,
             database=DB_NAME
         )
         if connection.is_connected():
