@@ -212,7 +212,7 @@ def serve():
         server.add_insecure_port('[::]:8080')
         print("Servidor iniciado na porta 8080...")
 
-        start_http_server(9100)  # Inicia o servidor Prometheus
+        start_http_server(9100) 
         server.start()
         server.wait_for_termination()
     except Exception as e:
