@@ -11,3 +11,4 @@ resources:
 - product-service-grpc.yaml
 - virtual-customer.yaml
 - virtual-worker.yaml
+- fast-api.yaml
