@@ -8,7 +8,7 @@ COPY proto-compiler.py ./
 COPY database/database.py ./database/database.py
 COPY prometheus/metrics.py ./prometheus/metrics.py
 
-RUN pip install grpcio grpcio-tools prometheus_client psutil mysql-connector python-dotenv
+RUN pip install grpcio grpcio-tools prometheus_client psutil mysql-connector
 
 RUN python /app/proto-compiler.py
 
