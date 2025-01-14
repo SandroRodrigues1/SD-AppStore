@@ -3,11 +3,11 @@ from mysql.connector import Error
 from dotenv import load_dotenv
 import os 
 
-DB_HOST = os.getenv("DB_HOST")
-DB_PORT = int(os.getenv("DB_PORT", 16308))  
-DB_NAME = os.getenv("DB_NAME", "defaultdb")
-DB_USER = os.getenv("DB_USER", "avnadmin")
-DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_HOST= "mysql-3da5348a-nartenrodrigues1212-6a24.g.aivencloud.com"
+DB_PORT= 16308
+DB_NAME= "defaultdb"
+DB_USER= "avnadmin"
+DB_PASSWORD= "AVNS_BRPcEvCreYw0ehFmtkY"
 
 load_dotenv()
 
