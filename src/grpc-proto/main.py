@@ -11,10 +11,13 @@ from prometheus.metrics import ProductServiceMetrics
 class ProductService(product_service_pb2_grpc.ProductServiceServicer):
 
     def GetProducts(self, request, context):
+        print("Starting the GetProducts")
         start_time = time.time()  # Iniciando o cronômetro para medir a duração da requisição
         try:
+            print("Starting the connection to the database!")
             connection = create_connection()
             if connection is None:
+                print("The connection has failed!")
                 ProductServiceMetrics.request_counter.labels(method="GetProducts", status="failure").inc()
                 return product_service_pb2.ProductList()
 
@@ -41,6 +44,7 @@ class ProductService(product_service_pb2_grpc.ProductServiceServicer):
         except Exception as e:
             ProductServiceMetrics.request_counter.labels(method="GetProducts", status="failure").inc()  # Falha
             ProductServiceMetrics.fetch_errors.inc()  # Incrementa erro de busca
+            print(e)
             raise e  # Relança a exceção
 
         duration = time.time() - start_time
