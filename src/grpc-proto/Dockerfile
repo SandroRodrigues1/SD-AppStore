@@ -12,4 +12,4 @@ RUN pip install grpcio grpcio-tools prometheus_client psutil mysql-connector
 
 RUN python /app/proto-compiler.py
 
-CMD ["python main.py"]
+CMD ["python", "main.py"]

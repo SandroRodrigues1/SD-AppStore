@@ -6,7 +6,7 @@ DB_HOST="mysql-3da5348a-nartenrodrigues1212-6a24.g.aivencloud.com"
 DB_PORT=16308
 DB_NAME="defaultdb"
 DB_USER="avnadmin"
-DB_PASSWORD="AVNS_BRPcEvCreYw0ehFmtkY"
+DB_PASSWORD="AVNS_S9X-qVQPgB2Y8SEC39q"
 
 def create_connection():
 
