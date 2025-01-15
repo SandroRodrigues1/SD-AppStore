@@ -47,14 +47,14 @@ class ProductServiceMetrics:
         "Total de falhas ao deletar produtos"
     )
 
-    # Métricas de latência (histograma)
+
     request_duration_histogram = Histogram(
         "product_service_request_duration_seconds",
         "Duração das requisições no serviço de produtos",
         labelnames=["method", "status", "path"]
     )
 
-    # Métricas do banco de dados
+
     db_active_connections = Gauge(
         "database_active_connections",
         "Número de conexões ativas no banco de dados"
@@ -65,7 +65,7 @@ class ProductServiceMetrics:
         "Número total de erros de consulta ao banco de dados"
     )
 
-    # Métrica de verificação de saúde (health check)
+
     health_check_requests = Counter(
         "product_service_health_check_requests_total",
         "Total de requisições de verificação de saúde"

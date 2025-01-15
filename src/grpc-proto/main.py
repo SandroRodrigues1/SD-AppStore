@@ -65,8 +65,8 @@ class ProductService(product_service_pb2_grpc.ProductServiceServicer):
 
     def GetProducts(self, request, context):
         print("Starting the GetProducts")
-        start_time = time.time()  # Iniciando o cronômetro para medir a duração da requisição
-        REQUEST_IN_PROGRESS.labels(method="GetProducts", path="/GetProducts").inc()  # Incrementando requisições em andamento
+        start_time = time.time() 
+        REQUEST_IN_PROGRESS.labels(method="GetProducts", path="/GetProducts").inc() 
         try:
             print("Starting the connection to the database!")
             connection = create_connection()
@@ -94,15 +94,15 @@ class ProductService(product_service_pb2_grpc.ProductServiceServicer):
             cursor.close()
             connection.close()
 
-            ProductServiceMetrics.products_fetched.inc(len(product_list))  # Incrementando a contagem de produtos recuperados
-            REQUEST_COUNT.labels(method="GetProducts", status="success", path="/GetProducts").inc()  # Sucesso
+            ProductServiceMetrics.products_fetched.inc(len(product_list))  
+            REQUEST_COUNT.labels(method="GetProducts", status="success", path="/GetProducts").inc()  
         except Exception as e:
-            REQUEST_COUNT.labels(method="GetProducts", status="failure", path="/GetProducts").inc()  # Falha
-            ProductServiceMetrics.fetch_errors.inc()  # Incrementando erro de busca
+            REQUEST_COUNT.labels(method="GetProducts", status="failure", path="/GetProducts").inc()  
+            ProductServiceMetrics.fetch_errors.inc()  
             print(e)
-            raise e  # Relança a exceção
+            raise e  
         finally:
-            REQUEST_IN_PROGRESS.labels(method="GetProducts", path="/GetProducts").dec()  # Decrementando requisições em andamento
+            REQUEST_IN_PROGRESS.labels(method="GetProducts", path="/GetProducts").dec()  
 
         duration = time.time() - start_time
         REQUEST_LATENCY.labels(method="GetProducts", status="success", path="/GetProducts").observe(duration)  # Latência
@@ -126,13 +126,13 @@ class ProductService(product_service_pb2_grpc.ProductServiceServicer):
             connection.close()
 
             if row:
-                ProductServiceMetrics.products_fetched.inc()  # Produto recuperado
+                ProductServiceMetrics.products_fetched.inc()  
                 REQUEST_COUNT.labels(method="GetProductById", status="success", path="/GetProductById").inc()  # Sucesso
             else:
                 REQUEST_COUNT.labels(method="GetProductById", status="failure", path="/GetProductById").inc()  # Falha
         except Exception as e:
             REQUEST_COUNT.labels(method="GetProductById", status="failure", path="/GetProductById").inc()  # Falha
-            ProductServiceMetrics.fetch_errors.inc()  # Incrementando erro de busca
+            ProductServiceMetrics.fetch_errors.inc()  
             print(e)
             raise e
         finally:
@@ -168,11 +168,11 @@ class ProductService(product_service_pb2_grpc.ProductServiceServicer):
             cursor.close()
             connection.close()
 
-            ProductServiceMetrics.products_created.inc()  # Incrementando a contagem de produtos criados
+            ProductServiceMetrics.products_created.inc()  
             REQUEST_COUNT.labels(method="AddProduct", status="success", path="/AddProduct").inc()  # Sucesso
         except Exception as e:
             REQUEST_COUNT.labels(method="AddProduct", status="failure", path="/AddProduct").inc()  # Falha
-            ProductServiceMetrics.create_errors.inc()  # Incrementando erro de criação
+            ProductServiceMetrics.create_errors.inc()  
             print(e)
             raise e
         finally:
@@ -214,11 +214,11 @@ class ProductService(product_service_pb2_grpc.ProductServiceServicer):
             cursor.close()
             connection.close()
 
-            ProductServiceMetrics.products_updated.inc()  # Incrementando a contagem de produtos atualizados
+            ProductServiceMetrics.products_updated.inc()  
             REQUEST_COUNT.labels(method="UpdateProduct", status="success", path="/UpdateProduct").inc()  # Sucesso
         except Exception as e:
             REQUEST_COUNT.labels(method="UpdateProduct", status="failure", path="/UpdateProduct").inc()  # Falha
-            ProductServiceMetrics.update_errors.inc()  # Incrementando erro de atualização
+            ProductServiceMetrics.update_errors.inc()  
             print(e)
             raise e
         finally:
@@ -268,11 +268,11 @@ class ProductService(product_service_pb2_grpc.ProductServiceServicer):
             cursor.close()
             connection.close()
 
-            ProductServiceMetrics.products_deleted.inc()  # Incrementando a contagem de produtos deletados
+            ProductServiceMetrics.products_deleted.inc()  
             REQUEST_COUNT.labels(method="DeleteProduct", status="success", path="/DeleteProduct").inc()  # Sucesso
         except Exception as e:
             REQUEST_COUNT.labels(method="DeleteProduct", status="failure", path="/DeleteProduct").inc()  # Falha
-            ProductServiceMetrics.delete_errors.inc()  # Incrementando erro de exclusão
+            ProductServiceMetrics.delete_errors.inc()  
             return product_service_pb2.ProductMessage(
                 sucess=False,
                 message=str(e),
@@ -298,7 +298,7 @@ def serve():
         server.add_insecure_port('[::]:8080')
         print("Servidor iniciado na porta 8080...")
 
-        start_http_server(9100)  # Iniciando o servidor HTTP para expor as métricas
+        start_http_server(9100)  
         server.start()
         server.wait_for_termination()
     except Exception as e:
