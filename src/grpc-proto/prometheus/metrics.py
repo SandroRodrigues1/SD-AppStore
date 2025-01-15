@@ -2,6 +2,57 @@ from prometheus_client import Counter, Histogram, Gauge
 import time
 
 class ProductServiceMetrics:
+
+    REQUEST_COUNT = Counter(
+        'http_request_total', 
+        'Total HTTP Requests', 
+        labelnames=['method', 'status', 'path']
+    )
+
+    REQUEST_LATENCY = Histogram(
+        'http_request_duration_seconds', 
+        'HTTP Request Duration', 
+        labelnames=['method', 'status', 'path']
+    )
+
+    REQUEST_IN_PROGRESS = Gauge(
+        'http_requests_in_progress', 
+        'HTTP Requests in progress', 
+        labelnames=['method', 'path']
+    )
+
+    # Métricas para gRPC
+    GRPC_REQUEST_COUNT = Counter(
+        'grpc_request_total', 
+        'Total gRPC Requests', 
+        labelnames=['method', 'status']
+    )
+
+    GRPC_REQUEST_LATENCY = Histogram(
+        'grpc_request_duration_seconds', 
+        'gRPC Request Duration', 
+        labelnames=['method', 'status']
+    )
+
+
+    # Métrica para conexões gRPC ativas
+    GRPC_CONNECTIONS = Gauge(
+        'grpc_connections', 
+        'Number of active gRPC connections', 
+        labelnames=['server']
+    )
+
+    # Métricas do sistema
+    CPU_USAGE = Gauge(
+        'process_cpu_usage', 
+        'Current CPU usage in percent'
+    )
+
+    MEMORY_USAGE = Gauge(
+        'process_memory_usage_bytes', 
+        'Current memory usage in bytes'
+    )
+
     # Métricas de contagem de requisições
     request_counter = Counter(
         "product_service_requests_total",
