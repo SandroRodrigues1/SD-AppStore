@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-service-grpc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-service-grpc
+  template:
+    metadata:
+      labels:
+        app: product-service-grpc
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "9100"
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+      - name: product-service-grpc
+        image: docker.io/sandro21/product-service-grpc-proto:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: 256m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
+        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-service-grpc
+spec:
+  type: ClusterIP  
+  ports:
+    - name: grpc
+      port: 8080         
+      targetPort: 8080    
+    - name: metrics
+      port: 9100          
+      targetPort: 9100
+  selector:
+    app: product-service-grpc
+

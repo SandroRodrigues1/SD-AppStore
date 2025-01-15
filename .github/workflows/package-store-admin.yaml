@@ -3,7 +3,7 @@ name: package-store-admin
 on:
   push:
     branches:
-      - 'main'
+      - 'dev'
     paths:
       - 'src/store-admin/**'
 
@@ -22,7 +22,7 @@ jobs:
       - name: Set environment variables
         id: set-variables
         run: |
-          echo "REPOSITORY=ghcr.io/$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_OUTPUT"
+          echo "REPOSITORY=docker.io/$(echo ${{ secrets.DOCKER_USERNAME }} | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_OUTPUT"
           echo "IMAGE=store-admin" >> "$GITHUB_OUTPUT"
           echo "VERSION=$(echo ${GITHUB_SHA} | cut -c1-7)" >> "$GITHUB_OUTPUT"
           echo "CREATED=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> "$GITHUB_OUTPUT"
@@ -41,19 +41,18 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       
-      - name: Login to GitHub Container Registry
+      - name: Login to GitHub DockerHub Registry
         uses: docker/login-action@v1 
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ github.token }}       
+          registry: docker.io
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}      
       
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
           context: src/store-admin
           file: src/store-admin/Dockerfile
-          platforms: linux/amd64,linux/arm64
           push: true
           tags: |
             ${{ steps.set-variables.outputs.REPOSITORY }}/${{ steps.set-variables.outputs.IMAGE }}:latest
@@ -62,3 +61,5 @@ jobs:
             org.opencontainers.image.source=${{ github.repositoryUrl }}
             org.opencontainers.image.created=${{ steps.set-variables.outputs.CREATED }}
             org.opencontainers.image.revision=${{ steps.set-variables.outputs.VERSION }}
+
+            

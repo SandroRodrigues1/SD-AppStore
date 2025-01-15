@@ -227,3 +227,4 @@ func initDatabase(apiType string) (*OrderService, error) {
 		return NewOrderService(mongoRepo), nil
 	}
 }
+
