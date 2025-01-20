@@ -103,7 +103,7 @@ def menu():
             elif choice == "5":
                 delete_product(stub)
             elif choice == "6":
-                print("Encerrando o programa. Até logo!")
+                print("Encerrando o programa")
                 break
             else:
                 print("Opção inválida. Tente novamente.")

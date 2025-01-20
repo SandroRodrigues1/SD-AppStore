@@ -236,7 +236,7 @@ class ProductService(product_service_pb2_grpc.ProductServiceServicer):
     def DeleteProduct(self, request, context):
         REQUEST_IN_PROGRESS.labels(method="DeleteProduct", path="/DeleteProduct").inc()
         try:
-            # Conectando ao banco de dados
+            # Conectando a base de dados
             connection = create_connection()
             if connection is None:
                 REQUEST_COUNT.labels(method="DeleteProduct", status="failure", path="/DeleteProduct").inc()
