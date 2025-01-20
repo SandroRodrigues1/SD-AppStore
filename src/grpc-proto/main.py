@@ -87,7 +87,7 @@ class ProductService(product_service_pb2_grpc.ProductServiceServicer):
                 product = product_service_pb2.Product(
                     id=row[0],
                     name=row[1],
-                    price=float(price),  
+                    price=float(f"{price:.2f}"),  # Ensure two decimal places
                     description=row[3],
                     image=row[4]
                 )
