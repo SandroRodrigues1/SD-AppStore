@@ -85,10 +85,11 @@ class ProductService(product_service_pb2_grpc.ProductServiceServicer):
                 product = product_service_pb2.Product(
                     id=row[0],
                     name=row[1],
-                    price=round(row[2], 2),
+                    price=round(row[2], 2),  # Garantir duas casas decimais
                     description=row[3],
                     image=row[4]
                 )
+                print(product.price)
                 product_list.append(product)
 
             cursor.close()
@@ -140,7 +141,7 @@ class ProductService(product_service_pb2_grpc.ProductServiceServicer):
 
         duration = time.time() - start_time
         REQUEST_LATENCY.labels(method="GetProductById", status="success", path="/GetProductById").observe(duration)  # Latência
-        return product_service_pb2.Product(id=row[0], name=row[1], price=row[2], description=row[3], image=row[4]) if row else product_service_pb2.Product()
+        return product_service_pb2.Product(id=row[0], name=row[1], price=round(row[2], 2), description=row[3], image=row[4]) if row else product_service_pb2.Product()
 
     def AddProduct(self, request, context):
         start_time = time.time()
@@ -161,7 +162,7 @@ class ProductService(product_service_pb2_grpc.ProductServiceServicer):
             cursor.execute(
                 """INSERT INTO products (name, price, description, image) 
                 VALUES (%s, %s, %s, %s)""",  # Removido o id da query
-                (request.name, request.price, request.description, request.image)
+                (request.name, round(request.price, 2), request.description, request.image)  # Arredondando preço
             )
             connection.commit()
 
@@ -207,7 +208,7 @@ class ProductService(product_service_pb2_grpc.ProductServiceServicer):
                 """UPDATE products 
                 SET name = %s, price = %s, description = %s, image = %s 
                 WHERE id = %s""",
-                (request.name, request.price, request.description, request.image, request.id)
+                (request.name, round(request.price, 2), request.description, request.image, request.id)  # Arredondando preço
             )
             connection.commit()
 
