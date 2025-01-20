@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - docker.io/sandro21/product-service-grpc-proto:0399c5d
+  - docker.io/sandro21/product-service-grpc-proto:3c22510
