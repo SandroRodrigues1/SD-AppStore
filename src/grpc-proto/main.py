@@ -7,6 +7,7 @@ from database.database import create_connection
 from prometheus_client import start_http_server
 from prometheus.metrics import ProductServiceMetrics  # Importando as métricas do arquivo metrics.py
 from prometheus_client import Counter, Histogram, Gauge  # Importando métricas adicionais
+from decimal import Decimal
 
 # Definindo métricas adicionais
 REQUEST_COUNT = Counter(
@@ -82,10 +83,11 @@ class ProductService(product_service_pb2_grpc.ProductServiceServicer):
 
             product_list = []
             for row in rows:
+                price = Decimal(row[2]).quantize(Decimal('0.01'))
                 product = product_service_pb2.Product(
                     id=row[0],
                     name=row[1],
-                    price=round(row[2], 2),  # Garantir duas casas decimais
+                    price=float(price),  
                     description=row[3],
                     image=row[4]
                 )
