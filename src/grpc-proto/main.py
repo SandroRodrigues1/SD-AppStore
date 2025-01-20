@@ -84,7 +84,7 @@ class ProductService(product_service_pb2_grpc.ProductServiceServicer):
             product_list = []
             for row in rows:
                 price = Decimal(row[2]).quantize(Decimal('0.01'))
-                formatted_price = float(format(price, '.2f'))
+                formatted_price = float(f"{price:.2f}")
                 product = product_service_pb2.Product(
                     id=row[0],
                     name=row[1],
