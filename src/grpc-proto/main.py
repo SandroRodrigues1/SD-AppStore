@@ -85,7 +85,7 @@ class ProductService(product_service_pb2_grpc.ProductServiceServicer):
                 product = product_service_pb2.Product(
                     id=row[0],
                     name=row[1],
-                    price=f"{row[2]:.2f}",
+                    price=round(row[2], 2),
                     description=row[3],
                     image=row[4]
                 )
