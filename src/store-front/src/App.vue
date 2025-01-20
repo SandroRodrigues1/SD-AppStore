@@ -31,7 +31,7 @@ export default {
     }
   },
   mounted() {
-    alert("Bem-vindo. Teste SD")
+    alert("Bem-vindo. Teste SD! ")
     this.getProducts()
   },
   methods: {
