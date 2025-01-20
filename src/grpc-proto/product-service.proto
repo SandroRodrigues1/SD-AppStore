@@ -9,7 +9,7 @@ package productService;
 message Product {
   int32 id = 1;
   string name = 2;
-  float price = 3;
+  string price = 3;
   string description = 4;
   string image = 5;
 }
